@@ -1,4 +1,4 @@
-# ed_formula_app
+# formula_app
 
 A new Flutter project.
 
