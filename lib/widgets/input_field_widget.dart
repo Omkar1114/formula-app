@@ -24,17 +24,25 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
   @override
   void initState() {
     super.initState();
-    _myFocusNode.addListener(() {
-      Color hasColor;
-      if (_myFocusNode.hasFocus) {
-        hasColor = widget.color;
-      } else {
-        hasColor = Colors.black54;
-      }
+    _myFocusNode.addListener(listener);
+  }
 
-      setState(() {
-        _textColor = hasColor;
-      });
+  @override
+  void dispose() {
+    super.dispose();
+    _myFocusNode.removeListener(listener);
+  }
+
+  void listener() {
+    Color hasColor;
+    if (_myFocusNode.hasFocus) {
+      hasColor = widget.color;
+    } else {
+      hasColor = Colors.black54;
+    }
+
+    setState(() {
+      _textColor = hasColor;
     });
   }
 
