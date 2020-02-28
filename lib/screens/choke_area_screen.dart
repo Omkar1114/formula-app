@@ -1,11 +1,12 @@
 import 'dart:math';
 
-import 'package:ed_formula_app/data/data.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/calculate_button.dart';
 import '../widgets/input_field_widget.dart';
 import '../widgets/output_result_widget.dart';
+
+import '../data/data.dart';
 
 class ChokeAreaScreen extends StatefulWidget {
   static const routeName = '/choke-area';
