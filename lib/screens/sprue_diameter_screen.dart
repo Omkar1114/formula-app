@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ed_formula_app/data/data.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/calculate_button.dart';
@@ -14,9 +15,9 @@ class SprueDiameterScreen extends StatefulWidget {
 }
 
 class _SprueDiameterScreenState extends State<SprueDiameterScreen> {
-  final _chokeAreaController = TextEditingController();
-  final _sprueHeightController = TextEditingController();
-  final _basinHeightController = TextEditingController();
+  final _chokeAreaController = TextEditingController(text: Data.chokeArea);
+  final _sprueHeightController = TextEditingController(text: Data.sprueHeight);
+  final _basinHeightController = TextEditingController(text: Data.basinHeight);
   double _sprueArea = 0;
   double _sprueDiameter = 0;
 
@@ -41,6 +42,13 @@ class _SprueDiameterScreenState extends State<SprueDiameterScreen> {
       _sprueArea =
           enteredChokeArea * sqrt(enteredSprueHeight / enteredBasinHeight);
       _sprueDiameter = sqrt(_sprueArea * 4 / pi);
+
+      // Add values to data file
+      Data.chokeArea = _chokeAreaController.text;
+      Data.sprueHeight = _sprueHeightController.text;
+      Data.basinHeight = _basinHeightController.text;
+      Data.surfaceArea = _sprueArea.toString();
+      Data.sprueDiameter = _sprueDiameter.toString();
     });
 
     FocusScope.of(context).unfocus();

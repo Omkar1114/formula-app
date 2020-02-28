@@ -1,11 +1,11 @@
 import 'dart:math';
 
+import 'package:ed_formula_app/data/data.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/calculate_button.dart';
 import '../widgets/input_field_widget.dart';
 import '../widgets/output_result_widget.dart';
-
 
 class ChokeAreaScreen extends StatefulWidget {
   static const routeName = '/choke-area';
@@ -15,11 +15,12 @@ class ChokeAreaScreen extends StatefulWidget {
 }
 
 class _ChokeAreaScreenState extends State<ChokeAreaScreen> {
-  final _weightWithGratingController = TextEditingController();
-  final _densityController = TextEditingController();
-  final _pouringTimeController = TextEditingController();
-  final _sprueHeightController = TextEditingController();
-  final _etaController = TextEditingController();
+  final _weightWithGratingController =
+      TextEditingController(text: Data.weightWithGrating);
+  final _densityController = TextEditingController(text: Data.density);
+  final _pouringTimeController = TextEditingController(text: Data.pouringTime);
+  final _sprueHeightController = TextEditingController(text: Data.sprueHeight);
+  final _etaController = TextEditingController(text: Data.eta);
   double _chokeArea = 0;
 
   void _calculateData() {
@@ -58,6 +59,14 @@ class _ChokeAreaScreenState extends State<ChokeAreaScreen> {
 
     setState(() {
       _chokeArea = enteredWeight / denominator;
+
+      // Add values to data file
+      Data.weightWithGrating = _weightWithGratingController.text;
+      Data.density = _densityController.text;
+      Data.pouringTime = _pouringTimeController.text;
+      Data.eta = _etaController.text;
+      Data.sprueHeight = _sprueHeightController.text;
+      Data.chokeArea = _chokeArea.toString();
     });
 
     FocusScope.of(context).unfocus();

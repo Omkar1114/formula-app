@@ -1,3 +1,4 @@
+import 'package:ed_formula_app/data/data.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/calculate_button.dart';
@@ -6,16 +7,14 @@ import '../widgets/output_result_widget.dart';
 
 class CastingModuleScreen extends StatefulWidget {
   static const routeName = '/casting-module';
-
   @override
   _CastingModuleScreenState createState() => _CastingModuleScreenState();
 }
 
 class _CastingModuleScreenState extends State<CastingModuleScreen> {
-  final _volumeController = TextEditingController();
-  final _surfaceAreaController = TextEditingController();
+  final _volumeController = TextEditingController(text: Data.volume);
+  final _surfaceAreaController = TextEditingController(text: Data.surfaceArea);
   double _modules = 0;
-
   void _calculateData() {
     if (_volumeController.text.isEmpty || _surfaceAreaController.text.isEmpty) {
       return;
@@ -31,6 +30,11 @@ class _CastingModuleScreenState extends State<CastingModuleScreen> {
 
     setState(() {
       _modules = entertedVolume / enteredSurfaceArea;
+
+      // Add values to data file
+      Data.volume = _volumeController.text;
+      Data.surfaceArea = _surfaceAreaController.text;
+      Data.module = _modules.toString();
     });
 
     FocusScope.of(context).unfocus();

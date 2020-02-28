@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:ed_formula_app/data/data.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/calculate_button.dart';
@@ -14,8 +15,8 @@ class CastingWeightScreen extends StatefulWidget {
 }
 
 class _CastingWeightScreenState extends State<CastingWeightScreen> {
-  final _volumeController = TextEditingController();
-  final _densityController = TextEditingController();
+  final _volumeController = TextEditingController(text: Data.volume);
+  final _densityController = TextEditingController(text: Data.density);
   double _castingWeight = 0;
 
   void _calculateData() {
@@ -31,6 +32,11 @@ class _CastingWeightScreenState extends State<CastingWeightScreen> {
 
     setState(() {
       _castingWeight = entertedVolume * enteredDensity * pow(10, -6);
+
+      // Add values to data file
+      Data.volume = _volumeController.text;
+      Data.density = _densityController.text;
+      Data.castingWeight = _castingWeight.toString();
     });
 
     FocusScope.of(context).unfocus();
